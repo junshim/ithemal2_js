@@ -28,7 +28,7 @@ For training the model, run the `run_ithemal.py` like below.
 * `{DATA_FILE}`: data file for training. Its 80% will be used to train and 20% will be used to validation
 * `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: Specify the location where the result files will be saved. They are saved into `saved/{Experiment_name}/{Experiment_time}`
 
-**There is an example at `run.sh`.** 
+**There is an example at `run.sh`.**  
 Sample Training data is saved at `trining_data/`
   
   
