@@ -38,7 +38,8 @@ For training the model, run the `run_ithemal.py` like below.
 * `{MODEL_CONFIG}`: configuration file of transformer model. Example, `config/ithemal_model`: 
 * `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: training result are saved at `saved/{Experiment_name}/{Experiment_time}`
     
-**There is an example at `run.sh`.**
+**There is an example at `run.sh`.**  
+Sample Training data is saved at `trining_data/`.
   
   
 # 4. Result files of training
