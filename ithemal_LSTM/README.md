@@ -6,7 +6,8 @@ The main goal of modification is running ithemal code at GPU. (The original vers
 In this chapter, describe the main files of **ithemal_LSTM**  
 ##  `run_ithemal.py` 
 As the main function of  **ithemal_LSTM**, create and call a trainer that do learning.  
-When run `run_ithemal.py`, you can **input the configuration of train and model as arguments**. Its list and default values ​​can be checked in the main function.  
+When run `run_ithemal.py`, you can **input the configuration of train and model as arguments**.
+Its list and default values ​​can be checked at the main function in `run_ithemal.py.  
 Examples of running `run_ithemal.py` can be showed at the **3. Training the model** chapter below.    
 After the learning, this will output the trained model and its report. It will be described at the **4. Result files of training**  
 
