@@ -10,6 +10,7 @@ Since the original ithemal source code is optimized for cpu, I is modified to ru
 It is a model using transformer model, not LSTM.  
 The two layer means that the instruction layer and the basic block layer are divided.  
 >   Two layer does not mean the number of encoder layers of the transformer.  
+>   It means hierarchical learning conducted in ithemal.
     
 ### ithemal_transformer_one_layer
 It is a model that combines the two layers mentioned above into one layer.  
