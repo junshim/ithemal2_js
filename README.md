@@ -4,7 +4,7 @@ More detailed explanations and training methods for each model exist in each fol
    
 ### ithemal_LSTM
 Base line model which use LSTM.
-The original ithemal source code is optimized for cpu, so it is modified to run on gpu.
+Since the original ithemal source code is optimized for cpu, I is modified to run on gpu.
   
 ### ithemal_transformer_two_layer
 It is a model using transformer model, not LSTM.  
