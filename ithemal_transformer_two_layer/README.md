@@ -1,8 +1,8 @@
 # 1. Overview
 **ithemal_transformer_two_layer** is the modified version of **ithemal_LSTM**.  
-The main goal of modification is changing LSTM to transformer model
+The main goal of modification is changing LSTM to transformer model.  
 The two layer means that the instruction layer and the basic block layer are divided. 
-  >   Two layer does not mean the number of encoder layers of the transformer.
+  >   Two layer does not mean the number of encoder layers of the transformer.  
   
 # 2. Main files
 In this chapter, describe the main files of **ithemal_transformer_two_layer**
