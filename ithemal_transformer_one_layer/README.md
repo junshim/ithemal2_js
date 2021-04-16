@@ -1,27 +1,62 @@
-# Training
-To train model, use `run.sh`
-Data file for training in the training_data/ 
+# 1. Overview
+**ithemal_transformer_one_layer** is the modified version of **ithemal_transformer_two_layer**.  
+The main goal of modification is combine the instruction layer and the basic block layer into one layer.
+   >   Layer does not mean the number of encoder layers of the transformer.  
 
-## run.sh
-`python run_ithemal.py --data {DATA_FILE} --train_cfg config/ithemal_train.json --model_cfg config/ithemal_model.json --experiment-name {EXPERIMENT_NAME} --experiment-time {EXPERIMENT_NAME}`
-* `config/ithemal_train.json`: configuration of trainer
-* `config/ithemal_model`: configuration of transformer model
-* `{DATA_FILE}`: data file for training. Its 80% will be used to train.  
-* `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: training result are saved into saved/Experiment_name/Experiment_time`.  
+So, difference from **ithemal_transformer_two_layer** is only `models.py`.  
+The source code execution method is the same.  
+  
+  
+# 2. Main files
+In this chapter, describe the main files of **ithemal_transformer_one_layer**
+  
+## `config/`
+One of main difference with **ithemal_LSTM**.  
+In **ithemal_transformer_one_layer**, configuration of trainer and model is defined by using **.json** files in `config/`, not input argument like **ithemal_LSTM**.  
+  
+##  `run_ithemal.py` 
+As the main function of **ithemal_transformer_one_layer**, create and call a trainer which do learning.  
+When run `run_ithemal.py`, you can **input the configuration file of train and model as arguments** which are mentioned above `config/`.    
+Examples of running `run_ithemal.py` can be showed at the **3. Training the model** chapter below.    
+After the learning, this will output the trained model and its report. It will be described at the **4. Result files of training**
+  
+## `train.py`
+A file that defines the **trainer** which do training.
+You can change directly training configuration (batch size, learning rate, decay ... ) at `class Trainer()`.
+  
+## `models.py`
+A file that **defines tranformer model** for Basic Block.  
+You can change directly model configuration (embedding_size, hidden_size, number of encoders, ....) at `class Ithemal()`
+Only difference with **ithemal_transformer_two_layer** is this file.  
 
-## Result
-Training result saved at `saved/Experiment_name/Experiment_time`
+   
+# 3. Training the model 
+For training the model, run the `run_ithemal.py` like below.  
+`python run_ithemal.py --data {DATA_FILE} --train_cfg {TRAINER_CONFIG} --model_cfg {MODEL_CONFIG} --experiment-name {EXPERIMENT_NAME} --experiment-time {EXPERIMENT_TIME}`
+* `{DATA_FILE}`: data file for training. Its 80% will be used to train.
+* `{TRAINER_CONFIG}`:  configuration file of trainer. Example, `config/ithemal_train.json`
+* `{MODEL_CONFIG}`: configuration file of transformer model. Example, `config/ithemal_model`: 
+* `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: training result are saved at `saved/{Experiment_name}/{Experiment_time}`
+    
+**There is an example at `run.sh`.**
+  
+  
+# 4. Result files of training
+Output/result files of `run_ithemal.py` is **Trained model and its report**.  
+They are saved at `saved/{Experiment_name}/{Experiment_time}`.  
 * `loss_report`: (epoch, time, average loss of epoch, learning rate)  .
-* `validation_result`:  (predicted, actual), (average loss), (correct-75%, total validataion data).
-* `trained.mdl`: trained model.
-* `predictor.dump`: model and data form of training.
+* `validation_result`:  (predicted, actual), (average loss), (correct-75%, total validation data).
+* `trained.mdl`: model data.
+* `predictor.dump`: model architecture of model.
 * `checkpoints`: trained model per epoch.
+  
+    
+# 5. Prediction
+For doing prediction by using trained model, run `prediction.py` like below.
+`python prediction.py --model {MODEL_ARCHITECTURE_FILE} --model-data {MODEL_DATA_FILE} --data {DATA_FILE}`
+	* `{MODEL_ARCHITECTURE_FILE}`: Model architecture to use. It is **predictor.dump** file at  **4. Result files of training**
+	* `{MODEL_DATA_FILE}`: Model data to use. It is **trained.mdl** file at **4. Result files of training**
+	* `{DATA_FILE}`: data file to predict
+> Currently, outputs the accuracy of the training model for the input data in data file. 
 
-# Validataion
-To validate model, use `validation.sh`
-It print validation result of 75%, 90%, 95% each
-
-## validation.sh
-`python validation.py --model saved/{EXPERIMENT_NAME}/{EXPERIMENT_TIME}/predictor.dump --model-data saved/{EXPERIMENT_NAME}/{EXPERIMENT_TIME}/trained.mdl --data {DATA_FILE}`
-* `predictor.dump` and `trained.mdl`: output from training.
-* `{DATA_FILE}`: same data file with training. Its 20% will be used to validation.
+**There is an example at `prediction.sh`**.
