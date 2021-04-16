@@ -53,7 +53,7 @@ They are saved at `saved/{Experiment_name}/{Experiment_time}`.
   
     
 # 5. Prediction
-For doing prediction by using trained model, run `prediction.py` like below.
+For doing prediction by using trained model, run `prediction.py` like below.  
 `python prediction.py --model {MODEL_ARCHITECTURE_FILE} --model-data {MODEL_DATA_FILE} --data {DATA_FILE}`
 * `{MODEL_ARCHITECTURE_FILE}`: Model architecture to use. It is **predictor.dump** file at  **4. Result files of training**
 * `{MODEL_DATA_FILE}`: Model data to use. It is **trained.mdl** file at **4. Result files of training**
