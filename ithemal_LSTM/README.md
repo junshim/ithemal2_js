@@ -20,14 +20,18 @@ You can change directly training configuration (batch size, learning rate, decay
 A file that defines several **models** for train.  
 There are tree models (RNN, LSTM, GRU), and **default model is LSTM**.  
 You can change directly model configuration (embedding_size, hidden_size, ....) at `class RNN()` 
-
+  
+  
 # 3. Training the model 
 For training the model, run the `run_ithemal.py` like below.  
 `python run_ithemal.py --data {DATA_FILE} --use-rnn train --experiment-name {EXPERIMENT_NAME} --experiment-time {EXPERIMENT_TIME}`  
 * `{DATA_FILE}`: data file for training. Its 80% will be used to train and 20% will be used to validation
 * `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: Specify the location where the result files will be saved. They are saved into `saved/{Experiment_name}/{Experiment_time}`
 
-**There is an example at `run.sh`.**  
+**There is an example at `run.sh`.** 
+Sample Training data is saved at `trining_data/`
+  
+  
 # 4. Result files of training
 Output/result files of `run_ithemal.py` is **Trained model and its report**.  
 They are saved at `saved/{Experiment_name}/{Experiment_time}`.  
