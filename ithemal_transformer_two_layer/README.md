@@ -1,8 +1,8 @@
 # 1. Overview
 **ithemal_transformer_two_layer** is the modified version of **ithemal_LSTM**.  
-The main goal of modification is changing LSTM to transformer model
+The main goal of modification is changing LSTM to transformer model.  
 The two layer means that the instruction layer and the basic block layer are divided. 
-  >   Two layer does not mean the number of encoder layers of the transformer.
+  >   Two layer does not mean the number of encoder layers of the transformer.  
   
 # 2. Main files
 In this chapter, describe the main files of **ithemal_transformer_two_layer**
@@ -34,7 +34,8 @@ For training the model, run the `run_ithemal.py` like below.
 * `{MODEL_CONFIG}`: configuration file of transformer model. Example, `config/ithemal_model`: 
 * `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: training result are saved at `saved/{Experiment_name}/{Experiment_time}`
     
-**There is an example at `run.sh`.**
+**There is an example at `run.sh`.**  
+Sample Training data is saved at `trining_data/`
   
   
 # 4. Result files of training

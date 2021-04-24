@@ -38,7 +38,8 @@ For training the model, run the `run_ithemal.py` like below.
 * `{MODEL_CONFIG}`: configuration file of transformer model. Example, `config/ithemal_model`: 
 * `{EXPERIMENT_NAME}` and `{EXPERIMENT_TIME}`: training result are saved at `saved/{Experiment_name}/{Experiment_time}`
     
-**There is an example at `run.sh`.**
+**There is an example at `run.sh`.**  
+Sample Training data is saved at `trining_data/`.
   
   
 # 4. Result files of training
@@ -52,11 +53,11 @@ They are saved at `saved/{Experiment_name}/{Experiment_time}`.
   
     
 # 5. Prediction
-For doing prediction by using trained model, run `prediction.py` like below.
+For doing prediction by using trained model, run `prediction.py` like below.  
 `python prediction.py --model {MODEL_ARCHITECTURE_FILE} --model-data {MODEL_DATA_FILE} --data {DATA_FILE}`
-	* `{MODEL_ARCHITECTURE_FILE}`: Model architecture to use. It is **predictor.dump** file at  **4. Result files of training**
-	* `{MODEL_DATA_FILE}`: Model data to use. It is **trained.mdl** file at **4. Result files of training**
-	* `{DATA_FILE}`: data file to predict
+* `{MODEL_ARCHITECTURE_FILE}`: Model architecture to use. It is **predictor.dump** file at  **4. Result files of training**
+* `{MODEL_DATA_FILE}`: Model data to use. It is **trained.mdl** file at **4. Result files of training**
+* `{DATA_FILE}`: data file to predict
 > Currently, outputs the accuracy of the training model for the input data in data file. 
 
 **There is an example at `prediction.sh`**.
