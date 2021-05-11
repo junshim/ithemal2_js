@@ -55,7 +55,7 @@ class LossReporter(object):
 
     def format_loss(self):
 
-        return 'Epoch {}, Loss: {:.2}, Accuracy: {:.2}'.format(
+        return 'Epoch {}, Loss: {:.2}, Learning Rate: {:.2}'.format(
                 self.epoch_no,
                 self.loss,
                 self.accuracy
