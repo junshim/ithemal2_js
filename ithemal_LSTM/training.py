@@ -109,6 +109,7 @@ class LossReporter(object):
             self.epoch_no,
             t - self.start_time,
             self.loss,
+            self.accuracy,
         )))
         self.loss_report_file.write(message + '\n')
 
@@ -147,6 +148,26 @@ def load_trainer(base_params, train_params):
 
     return Train(model, data, expt, train_params)
         
+def load_continue(base_params, train_params, model_dump, model_data):
+
+    expt = Experiment(train_params.experiment_name, train_params.experiment_time, base_params.data)
+
+    data = load_data(base_params)
+    dump = torch.load(model_dump)
+    model = dump.model
+
+    state_dict = torch.load(model_data)
+    model_dict = model.state_dict()
+    new_model_dict = {k: v for (k, v) in state_dict['model'].items() if k in model_dict}
+    model_dict.update(new_model_dict)
+    model.load_state_dict(model_dict)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+
+    dump_model_and_data(model, data, os.path.join(expt.experiment_root_path(), 'predictor.dump'))
+        
+    return Train(model, data, expt, train_params)
+
 
 class Train():
     
@@ -171,7 +192,7 @@ class Train():
         self.lr_decay_rate = train_params.lr_decay_rate
         self.momentum = 0.9
         self.nesterov=False
-        self.clip = 2.
+        self.clip = .1#2.
         self.opt = OptimizerType.SGD
         self.predict_log = False
 
@@ -323,7 +344,7 @@ class Train():
                 loss_tensor.backward()
 
                 #clip the gradients
-                torch.nn.utils.clip_grad_norm_(self.model.parameters(), 2.)
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), 0.1)#self.clip)
 
                 for param in self.model.parameters():
                     if param.grad is None:
@@ -345,7 +366,11 @@ class Train():
             self.loss_reporter.end_epoch(self.model, self.optimizer, epoch_loss_avg)        
 
             # decay lr if necessary
-            self.lr /= self.lr_decay_rate
+            #self.lr /= self.lr_decay_rate
+            #if epoch_no +1 % 3 == 0:
+            #self.clip = self.clip / 1.2
+            #self.lr = self.lr / 10.
+            self.lr = self.lr /1.2
             for param_group in self.optimizer.param_groups:
                 param_group['lr'] = self.lr
 
