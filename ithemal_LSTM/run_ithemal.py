@@ -50,9 +50,20 @@ def main():
     train.add_argument('--experiment-name', required=True, help='Name of the experiment to run')
     train.add_argument('--experiment-time', required=True, help='Time the experiment was started at')
     train.add_argument('--epochs', type=int, default=30, help='Number of epochs to run for')
-    train.add_argument('--batch-size', type=int, default=128, help='The batch size to use in train')
+    train.add_argument('--batch-size', type=int, default=32, help='The batch size to use in train')
     train.add_argument('--initial-lr', type=float, default=0.1, help='Initial learning rate')
     train.add_argument('--lr-decay-rate', default=1.2, help='LR division rate', type=float)
+
+    cont = sp.add_parser('cont', help='Train an ithemal model')
+    cont.add_argument('--experiment-name', required=True, help='Name of the experiment to run')
+    cont.add_argument('--experiment-time', required=True, help='Time the experiment was started at')
+    cont.add_argument('--epochs', type=int, default=30, help='Number of epochs to run for')
+    cont.add_argument('--batch-size', type=int, default=32, help='The batch size to use in train')
+    cont.add_argument('--initial-lr', type=float, default=0.1, help='Initial learning rate')
+    cont.add_argument('--lr-decay-rate', default=1.2, help='LR division rate', type=float)
+    cont.add_argument('--model',  help='Model architecture to use(dump file)', required=True)
+    cont.add_argument('--model-data', help='Model data to use(mdl file)', required=True)
+
 
     args = parser.parse_args()
 
@@ -80,6 +91,19 @@ def main():
         )
         trainer = training.load_trainer(base_params,train_params)
         trainer.train()
+
+    elif args.subparser == 'cont':
+        train_params = TrainParameters(
+            experiment_name=args.experiment_name,
+            experiment_time=args.experiment_time,
+            epochs=args.epochs,
+            batch_size=args.batch_size,
+            initial_lr=args.initial_lr,
+            lr_decay_rate=args.lr_decay_rate,
+        ) 
+        trainer = training.load_continue(base_params,train_params, args.model, args.model_data)
+        trainer.train()
+
     
     else:
         raise ValueError('Unknown mode "{}"'.format(args.subparser))
