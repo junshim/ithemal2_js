@@ -1,0 +1,1 @@
+python continue_ithemal.py --data training_data/skl_learning.data --train_cfg config/continue_train5.json --model saved/0512/1/predictor.dump --model-data saved/0512/1/checkpoints/3.mdl --experiment-name 0512 --experiment-time 1c
